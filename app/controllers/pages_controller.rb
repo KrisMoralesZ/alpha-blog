@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def home
-    render html: '####'
+    render home_index_path
   end
 
   def about
