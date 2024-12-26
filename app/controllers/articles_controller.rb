@@ -40,10 +40,12 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to @article, notice: "Article was successfully updated." }
+        flash[:success] = "Article was successfully updated."
+        format.html { redirect_to '/', notice: "Article was successfully updated." }
         format.json { render :show, status: :ok, location: @article }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        flash[:notice] { @article.errors[:base].join(' ') }
+        format.html { render :edit, status: :unprocessable_entity, notice: @article.errors }
         format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
