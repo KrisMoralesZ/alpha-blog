@@ -1,16 +1,5 @@
 <h1 class="text-center mt-4">Alpha Bloggers</h1>
 
-<h1>Users</h1>
-
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
-</div>
-
 <div class="container">
   <% @users.each do |user| %>
     <div class="row justify-content-md-center">
