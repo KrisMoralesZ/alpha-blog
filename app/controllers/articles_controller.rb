@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[ show edit update destroy ]
+  before_action :require_user, except: %i[ index show ]
+  before_action :require_same_user, only: %i[ edit update destroy ]
 
   # GET /articles or /articles.json
   def index
@@ -23,7 +25,7 @@ class ArticlesController < ApplicationController
   # POST /articles or /articles.json
   def create
     @article = Article.new(article_params)
-    @article.user = User.first
+    @article.user = current_user
 
     respond_to do |format|
       if @article.save
@@ -58,6 +60,13 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to articles_path, status: :see_other, notice: "Article was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      redirect_to @article
+      flash[:danger] = "You are not permitted to edit this article."
     end
   end
 
