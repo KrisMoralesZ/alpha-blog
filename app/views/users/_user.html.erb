@@ -11,7 +11,10 @@
           </h5>
           <p class="card-text"><%= pluralize(user.articles.count, "article") %></p>
           <% if logged_in? && user == current_user %>
-            <%= link_to "Edit profile", edit_user_path(user), class: "btn btn-outline-info" %>
+            <div class="d-flex justify-content-between">
+              <%= link_to "Edit profile", edit_user_path(user), class: "btn btn-outline-info" %>
+              <%= button_to "Delete profile", user_path(current_user), class: "btn btn-outline-danger", method: :delete, data: { confirm: "Are you sure?" } %>
+            </div>
           <% end %>
         </div>
         <div class="card-footer text-muted">
