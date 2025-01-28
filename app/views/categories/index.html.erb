@@ -1,8 +1,6 @@
-<p style="color: green"><%= notice %></p>
+<h1 class="text-center mt-4">Categories</h1>
 
-<h1>Categories</h1>
-
-<div id="categories">
+<div class="container">
   <% @categories.each do |category| %>
     <%= render category %>
     <p>
