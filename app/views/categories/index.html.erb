@@ -3,10 +3,10 @@
 <div class="container">
   <% @categories.each do |category| %>
     <%= render category %>
-    <p>
-      <%= link_to "Show this category", category %>
-    </p>
+    <div class="card-footer text-muted">
+      <small>
+        Created <%= time_ago_in_words(category.created_at) %> ago, Edited <%= time_ago_in_words(category.updated_at) %> ago
+      </small>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New category", new_category_path %>
