@@ -42,10 +42,12 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
+        # Duplicated code
         flash[:success] = "Article was successfully updated."
         format.html { redirect_to '/', notice: "Article was successfully updated." }
         format.json { render :show, status: :ok, location: @article }
       else
+        # Duplicated code
         flash[:notice] { @article.errors[:base].join(' ') }
         format.html { render :edit, status: :unprocessable_entity, notice: @article.errors }
         format.json { render json: @article.errors, status: :unprocessable_entity }
@@ -63,6 +65,7 @@ class ArticlesController < ApplicationController
     end
   end
 
+  # TODO: Move to private
   def require_same_user
     if current_user != @article.user && !current_user.admin?
       redirect_to @article
